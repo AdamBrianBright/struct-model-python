@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://me-docs.cifrazia.com/sitemap.xml.gz
+Sitemap: https://adambrianbright.github.io/struct-model-python/sitemap.xml.gz
