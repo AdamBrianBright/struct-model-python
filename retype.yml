@@ -1,7 +1,6 @@
 input: wiki
 output: .retype
-cname: me-docs.cifrazia.com
-url: https://me-docs.cifrazia.com
+url: https://adambrianbright.github.io/struct-model-python/
 branding:
   title: struct-model
   label: python
