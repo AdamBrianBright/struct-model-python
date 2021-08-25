@@ -5,9 +5,9 @@ description = "Struct to model (dataclass) for python"
 authors = ["Bogdan Parfenov <adam.brian.bright@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://adambrianbright.github.io/struct-model/"
-repository = "https://github.com/AdamBrianBright/struct-model"
-documentation = "https://adambrianbright.github.io/struct-model/"
+homepage = "https://adambrianbright.github.io/struct-model-python/"
+repository = "https://github.com/AdamBrianBright/struct-model-python"
+documentation = "https://adambrianbright.github.io/struct-model-python/"
 keywords = ["struct", "scheme", "pack", "model", "byte"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -36,8 +36,8 @@ packages = [
 ]
 
 [tool.poetry.urls]
-"ChangeLog" = "https://adambrianbright.github.io/struct-model/changelog"
-"Bug Tracker" = "https://github.com/AdamBrianBright/struct-model/issues"
+"ChangeLog" = "https://adambrianbright.github.io/struct-model-python/changelog"
+"Bug Tracker" = "https://github.com/AdamBrianBright/struct-model-python/issues"
 "Contact Author" = "https://vk.com/adam_bright"
 
 [tool.poetry.dependencies]

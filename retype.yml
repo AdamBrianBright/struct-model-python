@@ -13,7 +13,7 @@ edit:
   label: Edit on GitHub
 links:
   - text: Home
-    link: https://adambrianbright.github.io/struct-model/
+    link: https://adambrianbright.github.io/struct-model-python/
   - text: GitHub
     link: https://github.com/AdamBrianBright/struct-model-python
   - text: Issues
