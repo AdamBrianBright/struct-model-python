@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://me-docs.cifrazia.com/sitemap.xml.gz
