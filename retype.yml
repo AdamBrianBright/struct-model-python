@@ -1,0 +1,44 @@
+input: wiki
+output: .retype
+cname: me-docs.cifrazia.com
+url: https://me-docs.cifrazia.com
+branding:
+  title: struct-model
+  label: python
+meta:
+  title: " | struct-model"
+edit:
+  repo: https://github.com/AdamBrianBright/struct-model-python
+  branch: master
+  base: wiki
+  label: Edit on GitHub
+links:
+  - text: Home
+    link: https://adambrianbright.github.io/struct-model/
+  - text: GitHub
+    link: https://github.com/AdamBrianBright/struct-model-python
+  - text: Issues
+    link: https://github.com/AdamBrianBright/struct-model-python/issues
+footer:
+  copyright: "© Copyright {{ year }}. [Bogdan Parfenov](https://vk.com/adam_bright) All rights reserved."
+  links:
+    - text: VK
+      link: https://vk.com/adam_bright
+    - text: Email
+      link: "mailto:adam.brian.bright@gmail.com"
+snippets:
+  lineNumbers:
+    - bash
+    - command
+    - js
+    - json
+    - json5
+    - md
+    - py
+    - pyi
+    - sh
+    - toml
+    - ts
+    - txt
+    - yaml
+    - yml
