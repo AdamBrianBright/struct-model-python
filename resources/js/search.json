@@ -1,1 +1,1 @@
-[[{"l":"Welcome"}],[{"l":"Supported Types"},{"l":"Padding"},{"l":"Boolean"},{"l":"Integers"},{"l":"Floats"},{"l":"Char"},{"l":"Strings"}],[{"l":"Changelog"},{"i":"020-","l":"0.2.0"},{"i":"010-","l":"0.1.0"},{"l":"Added"}]]
+[[{"l":"Welcome"}],[{"l":"Supported Types"},{"l":"Padding"},{"l":"Boolean"},{"l":"Integers"},{"l":"Floats"},{"l":"Decimal"},{"l":"Char"},{"l":"Strings"},{"l":"UUID"}],[{"l":"Changelog"},{"i":"020-","l":"0.2.0"},{"l":"Added"},{"i":"011-","l":"0.1.1"},{"i":"added-1","l":"Added"},{"l":"Fixed"},{"i":"010","l":"0.1.0"},{"i":"added-2","l":"Added"}]]

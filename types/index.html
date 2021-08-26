@@ -25,11 +25,11 @@
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/struct-model-python/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="/struct-model-python/resources/css/retype.css?v=1.8.2.683233070649" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/struct-model-python/resources/css/retype.css?v=1.8.2.683251998059" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/struct-model-python/resources/js/config.js?v=1.8.2.683233070649" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/struct-model-python/resources/js/config.js?v=1.8.2.683251998059" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/struct-model-python/resources/js/retype.js?v=1.8.2" defer data-turbo-track="reload"></script>
-    <script id="prism-js" type="text/javascript" src="/struct-model-python/resources/js/prism.js?v=1.8.2.683233070649" defer></script>
+    <script id="prism-js" type="text/javascript" src="/struct-model-python/resources/js/prism.js?v=1.8.2.683251998059" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -222,6 +222,7 @@
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
 <pre class="language-python"><code v-pre class="language-python">from struct_model import *
 
+
 class Form(StructModel):
     pad: Padding(10)</code></pre>
 </doc-codeblock></div>
@@ -252,6 +253,7 @@ class Form(StructModel):
 </blockquote>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
 <pre class="language-python"><code v-pre class="language-python">from struct_model import *
+
 
 class Form(StructModel):
     is_alive: Bool</code></pre>
@@ -359,6 +361,7 @@ class Form(StructModel):
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
 <pre class="language-python"><code v-pre class="language-python">from struct_model import *
 
+
 class Form(StructModel):
     id: uInt8</code></pre>
 </doc-codeblock></div>
@@ -418,9 +421,39 @@ class Form(StructModel):
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
 <pre class="language-python"><code v-pre class="language-python">from struct_model import *
 
+
 class Form(StructModel):
     pos_x: Float8
     pos_y: Float8</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="decimal">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#decimal">#</doc-anchor-trigger>
+        <span>Decimal</span>
+    </h2>
+</doc-anchor-target>
+<table class="comfortable">
+<thead>
+<tr>
+<th>#</th>
+<th>Type</th>
+<th>Python type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q</td>
+<td><code v-pre>Decimal()</code></td>
+<td><code v-pre>decimal.Decimal</code></td>
+</tr>
+</tbody>
+</table>
+<div class="codeblock-wrapper"><doc-codeblock line-numbers>
+<pre class="language-python"><code v-pre class="language-python">from struct_model import *
+
+
+class Form(StructModel):
+    balance: Decimal(4)</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="char">
     <h2>
@@ -447,6 +480,7 @@ class Form(StructModel):
 <p>One-byte character</p>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
 <pre class="language-python"><code v-pre class="language-python">from struct_model import *
+
 
 class Form(StructModel):
     letter: Char</code></pre>
@@ -501,8 +535,38 @@ count bytes, but that the string returned can never contain more than 255 bytes.
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
 <pre class="language-python"><code v-pre class="language-python">from struct_model import *
 
+
 class Form(StructModel):
     username: String(64)</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="uuid">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#uuid">#</doc-anchor-trigger>
+        <span>UUID</span>
+    </h2>
+</doc-anchor-target>
+<table class="comfortable">
+<thead>
+<tr>
+<th>#</th>
+<th>Type</th>
+<th>Python type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s</td>
+<td><code v-pre>UUID</code></td>
+<td><code v-pre>uuid.UUID</code></td>
+</tr>
+</tbody>
+</table>
+<div class="codeblock-wrapper"><doc-codeblock line-numbers>
+<pre class="language-python"><code v-pre class="language-python">from struct_model import *
+
+
+class Form(StructModel):
+    uuid: UUID</code></pre>
 </doc-codeblock></div>
 
 
