@@ -1,3 +1,1 @@
-# Struct Model
-
-Struct to model (dataclass) for python
+wiki/index.md

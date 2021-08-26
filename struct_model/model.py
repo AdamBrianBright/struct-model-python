@@ -45,10 +45,7 @@ class StructModel:
             if not isinstance(_type, type) or not issubclass(_type, _Type):
                 continue
             cls._fields[_field] = _type
-            if issubclass(_type, DynamicLength):
-                struct += f'{_type.amount}{_type.key}'
-            else:
-                struct += _type.key
+            struct += f'{_type.amount}{_type.key}'
         cls._struct = Struct(struct)
         cls.__slots__ = tuple(cls._fields.keys())
 

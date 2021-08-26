@@ -17,6 +17,7 @@ Simple padding, it will create `N` empty bytes when packing, and void them when 
 ```python
 from struct_model import *
 
+
 class Form(StructModel):
     pad: Padding(10)
 ```
@@ -31,6 +32,7 @@ class Form(StructModel):
 
 ```python
 from struct_model import *
+
 
 class Form(StructModel):
     is_alive: Bool
@@ -54,6 +56,7 @@ class Form(StructModel):
 ```python
 from struct_model import *
 
+
 class Form(StructModel):
     id: uInt8
 ```
@@ -73,9 +76,24 @@ class Form(StructModel):
 ```python
 from struct_model import *
 
+
 class Form(StructModel):
     pos_x: Float8
     pos_y: Float8
+```
+
+## Decimal
+
+| #   | Type      | Python type       |
+| --- | --------- | ----------------- |
+| Q   | `Decimal()` | `decimal.Decimal` |
+
+```python
+from struct_model import *
+
+
+class Form(StructModel):
+    balance: Decimal(4)
 ```
 
 ## Char
@@ -88,6 +106,7 @@ One-byte character
 
 ```python
 from struct_model import *
+
 
 class Form(StructModel):
     letter: Char
@@ -115,6 +134,21 @@ parsing or not.
 ```python
 from struct_model import *
 
+
 class Form(StructModel):
     username: String(64)
+```
+
+## UUID
+
+| #   | Type      | Python type       |
+| --- | --------- | ----------------- |
+| s   | `UUID` | `uuid.UUID` |
+
+```python
+from struct_model import *
+
+
+class Form(StructModel):
+    uuid: UUID
 ```

@@ -1,3 +1,6 @@
+import decimal
+import uuid
+from decimal import Decimal
 from enum import Enum
 from typing import Literal, TYPE_CHECKING, Type, TypeVar, Union
 
@@ -15,7 +18,6 @@ __all__ = [
     'parse_bo',
     '_T_Type',
     '_Type',
-    'DynamicLength',
     'Padding',
     'Bool',
     'Char',
@@ -32,10 +34,14 @@ __all__ = [
     'Int8',
     'uInt8',
     'Float2',
+    'Float4',
+    'Float8',
     'Float',
     'Double',
     'String',
     'PascalString',
+    'Decimal',
+    'UUID',
 ]
 # region Byte Order
 # see: https://docs.python.org/3.9/library/struct.html#byte-order-size-and-alignment
@@ -88,9 +94,14 @@ def parse_bo(bo: T_ByteOrder = None) -> O_ALL_LITERAL:
 
 # <editor-fold defaultstate="collapsed" desc="Type basics">
 
+_Typ = TypeVar('_Typ', bound='_Type')
+_T_Type = Type[_Typ]
+
+
 class _Type:
     key: str
     byte_orders: Union[O_ALL_LITERAL, tuple[O_ALL_LITERAL]] = '*'
+    amount: int = 1
 
     def __init_subclass__(cls, key: str = '', byte_orders: str = '*'):
         assert key, f'Unbound key {cls}'
@@ -109,26 +120,9 @@ class _Type:
     def supports(cls, bo: O_ALL_LITERAL):
         return cls.byte_orders == '*' or cls.byte_orders == ['*'] or bo in cls.byte_orders
 
-
-_T_Type = Type[_Type]
-
-_Dyn = TypeVar('_Dyn', bound='DynamicLength')
-
-
-class DynamicLength(_Type, key='x'):
-    amount: int = 1
-
     @classmethod
-    def mutate(cls, amount: int = 1, **kwargs) -> Union[type, Type[_Dyn]]:
-        return type(cls.__name__, (cls, DynamicLength, _Type), {'amount': amount, **kwargs}, key=cls.key)
-
-    @classmethod
-    def to_struct_value(cls, v):
-        raise NotImplementedError
-
-    @classmethod
-    def to_python_value(cls, v):
-        raise NotImplementedError
+    def mutate(cls, **kwargs) -> Union[type, _T_Type]:
+        return type(cls.__name__, (cls, _Type), kwargs, key=cls.key, byte_orders=cls.byte_orders)
 
 
 # </editor-fold>
@@ -138,7 +132,7 @@ class DynamicLength(_Type, key='x'):
 if TYPE_CHECKING:
     _Padding = None
 else:
-    class _Padding(DynamicLength, _Type, key='x'):
+    class _Padding(_Type, key='x'):
         @classmethod
         def to_struct_value(cls, v):
             return bytes(cls.amount)
@@ -149,7 +143,7 @@ else:
 
 
 def Padding(amount: int = 1) -> Type[None]:  # noqa
-    return _Padding.mutate(amount)
+    return _Padding.mutate(amount=amount)
 
 
 # endregion
@@ -187,7 +181,7 @@ else:
             return bytes(v)
 
 
-    class _Bytes(bytes, DynamicLength, _Type, key='s'):
+    class _Bytes(bytes, _Type, key='s'):
         strip_null: bool
 
         @classmethod
@@ -209,11 +203,11 @@ else:
 
 
 def Bytes(amount: int = 1, strip_null: bool = True) -> Type[bytes]:  # noqa
-    return _Bytes.mutate(amount, strip_null=strip_null)
+    return _Bytes.mutate(amount=amount, strip_null=strip_null)
 
 
 def PascalBytes(amount: int = 1, strip_null: bool = True) -> Type[bytes]:  # noqa
-    return _PascalBytes.mutate(amount, strip_null=strip_null)
+    return _PascalBytes.mutate(amount=amount, strip_null=strip_null)
 
 
 # endregion
@@ -227,7 +221,7 @@ if TYPE_CHECKING:
     Int4 = uInt4 = int
     Int8 = uInt8 = int
 else:
-    class _Size(int, DynamicLength, _Type, key='n', byte_orders=(O_DEFAULT, O_NATIVE)):
+    class _Size(int, _Type, key='n', byte_orders=(O_DEFAULT, O_NATIVE)):
         @classmethod
         def to_struct_value(cls, v):
             v = int(v)
@@ -302,11 +296,11 @@ else:
 
 
 def Size(amount: int = 1) -> Type[int]:  # noqa
-    return _Size.mutate(amount)
+    return _Size.mutate(amount=amount)
 
 
 def uSize(amount: int = 1) -> Type[int]:  # noqa
-    return _uSize.mutate(amount)
+    return _uSize.mutate(amount=amount)
 
 
 # endregion
@@ -357,7 +351,7 @@ if TYPE_CHECKING:
     _String = _PascalString = str
 
 else:
-    class _String(str, DynamicLength, _Type, key='s'):
+    class _String(str, _Type, key='s'):
         strip_null: bool
 
         @classmethod
@@ -381,11 +375,80 @@ else:
 
 
 def String(amount: int = 1, strip_null: bool = True) -> Type[str]:  # noqa
-    return _String.mutate(amount, strip_null=strip_null)
+    return _String.mutate(amount=amount, strip_null=strip_null)
 
 
 def PascalString(amount: int = 1, strip_null: bool = True) -> Type[str]:  # noqa
-    return _PascalString.mutate(amount, strip_null=strip_null)
+    return _PascalString.mutate(amount=amount, strip_null=strip_null)
+
+
+# endregion
+
+# region Decimal
+if TYPE_CHECKING:
+    _Decimal = decimal.Decimal
+else:
+    class _Decimal(str, _Type, key='Q'):
+        decimal_places: int
+
+        @classmethod
+        def to_struct_value(cls, v):
+            if not isinstance(v, decimal.Decimal):
+                v = decimal.Decimal(v)
+            v *= 10 ** cls.decimal_places
+            return v.as_integer_ratio()[0]
+
+        @classmethod
+        def to_python_value(cls, v):
+            if isinstance(v, decimal.Decimal) or None:
+                return v
+            v = decimal.Decimal(v)
+            v /= 10 ** cls.decimal_places
+            return v
+
+
+def Decimal(decimal_places: int) -> Type[decimal.Decimal]:  # noqa
+    """
+    Decimal - is an overlay for uInt8
+    Usage:
+        field: Decimal(4)
+
+    :param decimal_places: The number of decimal places to store with the number.
+    """
+    return _Decimal.mutate(decimal_places=decimal_places)
+
+
+# endregion
+
+# region UUID
+if TYPE_CHECKING:
+    UUID = uuid.UUID
+else:
+    class UUID(str, _Type, key='s'):
+        amount: 16
+
+        @classmethod
+        def to_uuid(cls, v):
+            if isinstance(v, int):
+                return uuid.UUID(int=v)
+            elif isinstance(v, bytes):
+                return uuid.UUID(bytes=v)
+            else:
+                return uuid.UUID(v)
+
+        @classmethod
+        def to_struct_value(cls, v):
+            if not isinstance(v, uuid.UUID):
+                v = cls.to_uuid(v)
+            return v.bytes
+
+        @classmethod
+        def to_python_value(cls, v):
+            if isinstance(v, uuid.UUID) or None:
+                return v
+            return cls.to_uuid(v)
+
+        amount = 16
 # endregion
 
 # endregion
