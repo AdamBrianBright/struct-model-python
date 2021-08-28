@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "struct-model"
-version = "0.1.2"
+version = "0.1.0"
 description = "Struct to model (dataclass) for python"
 authors = ["Bogdan Parfenov <adam.brian.bright@gmail.com>"]
 license = "MIT"
@@ -23,7 +23,6 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Topic :: Software Development",
     "Topic :: Software Development :: Libraries",
