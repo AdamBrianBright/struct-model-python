@@ -9,27 +9,27 @@
     <!-- Primary Meta Tags -->
     <title>Welcome | struct-model</title>
     <meta name="title" content="Welcome | struct-model">
-    <meta name="description" content="Struct-Model - is an annotations based wrapper for python's built-in Struct module." />
+    <meta name="description" content="Struct-Model is an annotations based wrapper for python's built-in Struct module." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://adambrianbright.github.io/struct-model-python/">
     <meta property="og:title" content="Welcome | struct-model">
-    <meta property="og:description" content="Struct-Model - is an annotations based wrapper for python's built-in Struct module.">
+    <meta property="og:description" content="Struct-Model is an annotations based wrapper for python's built-in Struct module.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://adambrianbright.github.io/struct-model-python/">
     <meta property="twitter:title" content="Welcome | struct-model">
-    <meta property="twitter:description" content="Struct-Model - is an annotations based wrapper for python's built-in Struct module.">
+    <meta property="twitter:description" content="Struct-Model is an annotations based wrapper for python's built-in Struct module.">
     
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/struct-model-python/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="/struct-model-python/resources/css/retype.css?v=1.8.2.683458425632" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/struct-model-python/resources/css/retype.css?v=1.8.2.683458544756" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/struct-model-python/resources/js/config.js?v=1.8.2.683458425632" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/struct-model-python/resources/js/config.js?v=1.8.2.683458544756" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/struct-model-python/resources/js/retype.js?v=1.8.2" defer data-turbo-track="reload"></script>
-    <script id="prism-js" type="text/javascript" src="/struct-model-python/resources/js/prism.js?v=1.8.2.683458425632" defer></script>
+    <script id="prism-js" type="text/javascript" src="/struct-model-python/resources/js/prism.js?v=1.8.2.683458544756" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -193,7 +193,13 @@
         <span>Welcome</span>
     </h1>
 </doc-anchor-target>
-<p>Struct-Model - is an annotations based wrapper for python&#x27;s built-in <code v-pre>Struct</code> module.</p>
+<doc-anchor-target id="struct-model">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#struct-model">#</doc-anchor-trigger>
+        <span>Struct-Model</span>
+    </h2>
+</doc-anchor-target>
+<p>Struct-Model is an annotations based wrapper for python&#x27;s built-in <code v-pre>Struct</code> module.</p>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
 <div class="codeblock-title">example.py</div>
 <pre class="language-python"><code v-pre class="language-python">from struct_model import StructModel, String, uInt4
@@ -207,6 +213,39 @@ print(Form(&quot;Adam Bright&quot;, 12).pack())
 print(Form.unpack(b'Adam Bright\x00\x00\x00\x00\x00\x00\x00\x00\x0c').json())
 # {&quot;username&quot;: &quot;Adam Bright&quot;, &quot;balance&quot;: 12}</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="installation">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#installation">#</doc-anchor-trigger>
+        <span>Installation</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="poetry">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#poetry">#</doc-anchor-trigger>
+        <span>Poetry</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock line-numbers>
+<pre class="language-bash"><code v-pre class="language-bash">poetry add struct-model-python</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="pip">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#pip">#</doc-anchor-trigger>
+        <span>PIP</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock line-numbers>
+<pre class="language-bash"><code v-pre class="language-bash">pip install struct-model-python</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="requirements">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#requirements">#</doc-anchor-trigger>
+        <span>Requirements</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><a href="https://github.com/ultrajson/ultrajson"><code v-pre>ujson &gt;= 4.1.0</code></a></li>
+</ul>
 
 
 
