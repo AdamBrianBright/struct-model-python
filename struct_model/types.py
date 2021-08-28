@@ -1,8 +1,7 @@
 import decimal
+import enum
 import uuid
-from decimal import Decimal
-from enum import Enum
-from typing import Literal, TYPE_CHECKING, Type, TypeVar, Union
+from typing import Literal, TYPE_CHECKING, Type, TypeVar
 
 __all__ = [
     'O_DEFAULT',
@@ -53,10 +52,10 @@ O_LITTLE = O_SMALL = '<'
 O_BIG = '>'
 O_NETWORK = '!'
 O_ALL = list('@=<>!')
-O_ALL_LITERAL = Union[Literal['@', '=', '<', '>', '!'], str]
+O_ALL_LITERAL = Literal['@', '=', '<', '>', '!'] | str
 
 
-class ByteOrder(Enum):
+class ByteOrder(enum.Enum):
     default = '@'
     native = '='
     little = '<'
@@ -65,7 +64,7 @@ class ByteOrder(Enum):
     network = '!'
 
 
-T_ByteOrder = Union[ByteOrder, O_ALL_LITERAL, Literal['big', 'small', 'little', 'network']]
+T_ByteOrder = ByteOrder | O_ALL_LITERAL | Literal['big', 'small', 'little', 'network']
 
 
 def parse_bo(bo: T_ByteOrder = None) -> O_ALL_LITERAL:
@@ -100,7 +99,7 @@ _T_Type = Type[_Typ]
 
 class _Type:
     key: str
-    byte_orders: Union[O_ALL_LITERAL, tuple[O_ALL_LITERAL]] = '*'
+    byte_orders: O_ALL_LITERAL | tuple[O_ALL_LITERAL] = '*'
     amount: int = 1
 
     def __init_subclass__(cls, key: str = '', byte_orders: str = '*'):
@@ -121,7 +120,7 @@ class _Type:
         return cls.byte_orders == '*' or cls.byte_orders == ['*'] or bo in cls.byte_orders
 
     @classmethod
-    def mutate(cls, **kwargs) -> Union[type, _T_Type]:
+    def mutate(cls, **kwargs) -> type | _T_Type:
         return type(cls.__name__, (cls, _Type), kwargs, key=cls.key, byte_orders=cls.byte_orders)
 
 

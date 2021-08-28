@@ -18,9 +18,22 @@ Expected: unknown
 - [ ] Added `Email` type
 - [ ] Added `StructModel.__init__` hints for `IDE`
 
-## `0.1.1` [!badge variant="info" text="LATEST"]
+## `0.1.2` [!badge variant="info" text="LATEST"]
 
-Released: 2020-08-26
+Released: 2021-08-28
+
+### Added
+
+- [x] Added [`ujson`](https://github.com/ultrajson/ultrajson)
+
+### Changed
+
+- [x] Exposed `struct` and `byte_order` attributes of `StructModel`
+- [x] Upgraded to `Python 3.10`
+
+## `0.1.1`
+
+Released: 2021-08-26
 
 ### Added
 
@@ -34,7 +47,7 @@ Released: 2020-08-26
 
 ## `0.1.0`
 
-Released: 2020-08-25
+Released: 2021-08-25
 
 ### Added
 

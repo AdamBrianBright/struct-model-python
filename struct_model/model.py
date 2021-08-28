@@ -1,6 +1,7 @@
-import json as _json
 from struct import Struct
-from typing import Callable, Iterable, TypeVar, Union
+from typing import Iterable, TypeVar
+
+import ujson
 
 from .types import *
 
@@ -23,9 +24,9 @@ class StructModel:
             username: char[24]
             balance: uint4
     """
-    _byte_order: O_ALL_LITERAL
+    byte_order: O_ALL_LITERAL
     _fields: dict[str, _T_Type]
-    _struct: Struct
+    struct: Struct
 
     def __init__(self, *args, **kwargs):
         for k, v in zip(self._fields.keys(), args):
@@ -38,7 +39,7 @@ class StructModel:
         :param byte_order: big |
         :type byte_order:
         """
-        cls._byte_order = parse_bo(byte_order)
+        cls.byte_order = parse_bo(byte_order)
         cls._fields = {}
         struct = byte_order
         for _field, _type in cls.__annotations__.items():
@@ -46,18 +47,18 @@ class StructModel:
                 continue
             cls._fields[_field] = _type
             struct += f'{_type.amount}{_type.key}'
-        cls._struct = Struct(struct)
+        cls.struct = Struct(struct)
         cls.__slots__ = tuple(cls._fields.keys())
 
     def iter_keys(self) -> Iterable[str]:
         for field in self._fields.keys():
             yield field
 
-    def iter_values(self) -> Iterable[Union[int, float, str, bool, None, bytes]]:
+    def iter_values(self) -> Iterable[int | float | str | bool | bytes | None]:
         for field in self._fields.keys():
             yield getattr(self, field, None)
 
-    def iter_items(self) -> Iterable[tuple[str, Union[int, float, str, bool, None, bytes]]]:
+    def iter_items(self) -> Iterable[tuple[str, int | float | str | bool | bytes | None]]:
         yield from zip(self.iter_keys(), self.iter_values())
 
     def _dict_items(self):
@@ -74,24 +75,24 @@ class StructModel:
     def from_dict(cls, obj: dict) -> T:
         return cls(**obj)
 
-    def json(self, encoder: Callable[[dict], str] = _json.dumps) -> str:
-        return encoder(self.dict())
+    def json(self) -> str:
+        return ujson.dumps(self.dict(), ensure_ascii=False, escape_forward_slashes=False)
 
     @classmethod
-    def from_json(cls, obj: str, decoder: Callable[[str], dict] = _json.loads) -> T:
-        return cls(**decoder(obj))
+    def from_json(cls, obj: str | bytes) -> T:
+        return cls(**ujson.loads(obj))
 
     def pack(self) -> bytes:
-        return self._struct.pack(*(
+        return self.struct.pack(*(
             _type.to_struct_value(val)
             for val, _type in zip(self.iter_values(), self._fields.values())
         ))
 
     @classmethod
-    def unpack(cls, buff: Union[bytes, bytearray]) -> T:
+    def unpack(cls, buff: bytes | bytearray | memoryview) -> T:
         return cls(*(
             _type.to_python_value(val)
-            for val, _type in zip(cls._struct.unpack(buff), cls._fields.values())
+            for val, _type in zip(cls.struct.unpack(buff), cls._fields.values())
         ))
 
     dump = dumps = pack

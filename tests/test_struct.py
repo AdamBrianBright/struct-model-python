@@ -1,10 +1,10 @@
-from struct_model import Double, String, StructModel, uInt4
+import struct_model
 
 
-class Form(StructModel):
-    username: String(16)
-    gold_coins: uInt4
-    last_seen: Double
+class Form(struct_model.StructModel):
+    username: struct_model.String(16)
+    gold_coins: struct_model.uInt4
+    last_seen: struct_model.Double
 
 
 FORM_BYTES = b'Adam Bright\x00\x00\x00\x00\x00\x00\x00\x00\x14A\x9dZ\xd6\xcc\x00\x00\x00'
