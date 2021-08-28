@@ -41,7 +41,7 @@ packages = [
 "Contact Author" = "https://vk.com/adam_bright"
 
 [tool.poetry.dependencies]
-python = ">=3.10, <4.0"
+python = ">=3.10.0rc1, <4.0"
 ujson = "^4.1.0"
 
 [tool.poetry.dev-dependencies]
