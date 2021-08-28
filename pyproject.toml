@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "struct-model"
+name = "struct-model-python"
 version = "0.1.0"
 description = "Struct to model (dataclass) for python"
 authors = ["Bogdan Parfenov <adam.brian.bright@gmail.com>"]
