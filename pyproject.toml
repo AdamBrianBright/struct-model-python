@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "struct-model-python"
-version = "0.1.0"
+version = "0.1.1"
 description = "Struct to model (dataclass) for python"
 authors = ["Bogdan Parfenov <adam.brian.bright@gmail.com>"]
 license = "MIT"
@@ -41,11 +41,11 @@ packages = [
 
 [tool.poetry.dependencies]
 python = ">=3.10.0rc1, <4.0"
-ujson = "^4.1.0"
+ujson = "^5.1.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2.4"
-pytest-cov = "^2.12.1"
+pytest = "^6.2.5"
+pytest-cov = "^3.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
