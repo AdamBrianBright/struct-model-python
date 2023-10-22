@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## `0.2.0` [!badge variant="info" text="NEXT"]
+## `1.0.0` [!badge variant="info" text="NEXT"]
 
 Expected: unknown
 
@@ -18,7 +18,21 @@ Expected: unknown
 - [ ] Added `Email` type
 - [ ] Added `StructModel.__init__` hints for `IDE`
 
-## `0.1.2` [!badge variant="info" text="LATEST"]
+## `0.2.0` [!badge variant="info" text="LATEST"]
+
+Released: 2023-10-22
+
+### Added
+
+### Changed
+
+- [x] Upgraded to `Python 3.12`
+
+### Removed
+
+- [x] Removed unnecessary dependency: `ujson`
+
+## `0.1.2`
 
 Released: 2021-08-28
 

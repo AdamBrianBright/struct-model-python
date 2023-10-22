@@ -1,4 +1,5 @@
 .idea/sonarlint
+.idea/discord.xml
 htmlcov
 .coverage
 .coverage.*

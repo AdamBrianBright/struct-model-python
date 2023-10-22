@@ -1,8 +1,6 @@
 from struct import Struct
 from typing import Iterable, TypeVar
 
-import ujson
-
 from .types import *
 
 __all__ = [
@@ -74,13 +72,6 @@ class StructModel:
     @classmethod
     def from_dict(cls, obj: dict) -> T:
         return cls(**obj)
-
-    def json(self) -> str:
-        return ujson.dumps(self.dict(), ensure_ascii=False, escape_forward_slashes=False)
-
-    @classmethod
-    def from_json(cls, obj: str | bytes) -> T:
-        return cls(**ujson.loads(obj))
 
     def pack(self) -> bytes:
         return self.struct.pack(*(
